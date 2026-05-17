@@ -38,3 +38,14 @@ This project is ready to deploy on [Render](https://render.com/) or any service 
 - `Procfile` — tells Render how to start the app
 - `runtime.txt` — specifies the Python version
 - `.gitignore` — ignores local environment and build artifacts
+- `.nojekyll` — ensures GitHub Pages serves the static site correctly
+
+## GitHub Pages live site
+
+The repository now includes a static root `index.html` and JavaScript inventory logic, so GitHub Pages can host the app as a live website.
+
+If Pages is enabled for this repo, the live link should be:
+
+`https://bashiirabshircali7772-blip.github.io/app-invontery/`
+
+If the page is not yet live, open your repo Settings > Pages and set the source to the `main` branch and the root folder `/`.

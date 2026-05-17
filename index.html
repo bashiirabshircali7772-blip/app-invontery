@@ -1,29 +1,67 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Inventory App</title>
-  <style>
-    body { font-family: Arial, sans-serif; background: #0b1120; color: #e2e8f0; display: flex; min-height: 100vh; align-items: center; justify-content: center; margin: 0; }
-    .container { max-width: 620px; background: rgba(15, 23, 42, 0.96); padding: 32px; border-radius: 22px; box-shadow: 0 22px 70px rgba(0,0,0,0.35); }
-    h1 { margin-top: 0; color: #38bdf8; }
-    p { line-height: 1.7; }
-    a { color: #22c55e; text-decoration: none; font-weight: bold; }
-    .note { margin-top: 24px; padding: 18px; border-radius: 16px; background: rgba(255,255,255,0.05); border: 1px solid rgba(148,163,184,0.2); }
-  </style>
+  <title>Inventory Management System</title>
+  <link rel="stylesheet" href="static/style.css" />
 </head>
 <body>
-  <div class="container">
-    <h1>Inventory Management System</h1>
-    <p>Welcome! This project uses Python and Flask to manage inventory items with create, update, delete, status, and action fields.</p>
-    <div class="note">
-      <p>To run the app, open the project folder and execute:</p>
-      <pre style="background:#07101d;padding:12px;border-radius:12px;color:#cbd5e1;">pip install flask
-python app.py</pre>
-      <p>Then open <strong>http://127.0.0.1:5000</strong> in your browser.</p>
+  <header>
+    <div class="brand">
+      <h1>Inventory System</h1>
+      <p>Maareynta alaabta, status, action, update, delete iyo create.</p>
     </div>
-    <p>You can also view the code and upload it to GitHub from this folder.</p>
-  </div>
+  </header>
+
+  <main>
+    <section class="card form-card">
+      <h2>Kudar Alaab Cusub</h2>
+      <div id="alert-box" class="alert" style="display: none;"></div>
+      <form id="item-form" class="grid-form">
+        <label>Magaca Alaabta
+          <input id="name" type="text" name="name" placeholder="Magaca alaabta" required />
+        </label>
+        <label>Tirada
+          <input id="quantity" type="number" name="quantity" min="0" value="1" required />
+        </label>
+        <label>Status
+          <select id="status" name="status"></select>
+        </label>
+        <label>Action
+          <input id="action" type="text" name="action" placeholder="Tusaale: Restock, Ship, Inspect" />
+        </label>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Add Item</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="card table-card">
+      <h2>Inventory List</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Magaca</th>
+              <th>Tirada</th>
+              <th>Status</th>
+              <th>Action</th>
+              <th>Update</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody id="inventory-body"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Inventory management system oo HTML iyo JavaScript ku dhisan.</p>
+  </footer>
+
+  <script src="static/app.js"></script>
 </body>
 </html>
