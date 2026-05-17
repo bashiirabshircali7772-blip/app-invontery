@@ -3,7 +3,7 @@ import json
 import os
 
 app = Flask(__name__)
-app.secret_key = 'inventory-secret-key'
+app.secret_key = os.environ.get('SECRET_KEY', 'inventory-secret-key')
 DATA_FILE = 'inventory.json'
 DEFAULT_STATUSES = ['Available', 'Running Low', 'Out of Stock']
 
@@ -105,4 +105,8 @@ def change_status(item_id):
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000),
+    app.run(
+        debug=True,
+        host='0.0.0.0',
+        port=int(os.environ.get('PORT', 5000))
+    )
