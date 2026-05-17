@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "name": "said haaji",
+    "quantity": 2,
+    "status": "Available",
+    "action": "ship"
+  },
+  {
+    "id": 2,
+    "name": "Bashiir abshir Cali",
+    "quantity": 17,
+    "status": "Running Low",
+    "action": "baasto"
+  }
+]

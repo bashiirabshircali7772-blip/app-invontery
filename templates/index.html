@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inventory Management System</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <h1>Inventory System</h1>
+      <p>Maareynta alaabta, status, action, update, delete iyo create.</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="card form-card">
+      <h2>Kudar Alaab Cusub</h2>
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          <div class="alerts">
+            {% for category, message in messages %}
+              <div class="alert {{ category }}">{{ message }}</div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endwith %}
+      <form action="{{ url_for('create_item') }}" method="post" class="grid-form">
+        <label>Magaca Alaabta
+          <input type="text" name="name" placeholder="Magaca alaabta" required />
+        </label>
+        <label>Tirada
+          <input type="number" name="quantity" min="0" value="1" required />
+        </label>
+        <label>Status
+          <select name="status">
+            {% for status in statuses %}
+              <option>{{ status }}</option>
+            {% endfor %}
+          </select>
+        </label>
+        <label>Action
+          <input type="text" name="action" placeholder="Tusaale: Restock, Ship, Inspect" />
+        </label>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Add Item</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="card table-card">
+      <h2>Inventory List</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Magaca</th>
+              <th>Tirada</th>
+              <th>Status</th>
+              <th>Action</th>
+              <th>Update</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% if items %}
+              {% for item in items %}
+                <tr>
+                  <td>{{ item.id }}</td>
+                  <td>
+                    <form action="{{ url_for('update_item', item_id=item.id) }}" method="post" class="row-form">
+                      <input type="text" name="name" value="{{ item.name }}" class="input-small" required />
+                  </td>
+                  <td>
+                      <input type="number" name="quantity" value="{{ item.quantity }}" min="0" class="input-small" required />
+                  </td>
+                  <td>
+                      <select name="status" class="select-small">
+                        {% for status in statuses %}
+                          <option value="{{ status }}" {% if status == item.status %}selected{% endif %}>{{ status }}</option>
+                        {% endfor %}
+                      </select>
+                  </td>
+                  <td>
+                      <input type="text" name="action" value="{{ item.action }}" class="input-small" placeholder="Action" />
+                  </td>
+                  <td class="actions">
+                      <button type="submit" class="btn btn-success">Save</button>
+                    </form>
+                  </td>
+                  <td class="actions">
+                    <form action="{{ url_for('delete_item', item_id=item.id) }}" method="post">
+                      <button type="submit" class="btn btn-delete">Delete</button>
+                    </form>
+                  </td>
+                </tr>
+              {% endfor %}
+            {% else %}
+              <tr>
+                <td colspan="7" class="empty-state">Ma jiraan alaabooyin hadda.</td>
+              </tr>
+            {% endif %}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Inventory management system oo Python iyo HTML ku dhisan.</p>
+  </footer>
+</body>
+</html>
